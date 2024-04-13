@@ -1,10 +1,10 @@
 import { MaterialYouThemeProvider } from "./src/providers/MaterialYouThemeProvider";
-import { WelcomeScreen } from "./src/screens/Welcome";
+import { RootNavigation } from "./src/navigation/RootNavigation";
 
 const App = () => {
   return (
     <MaterialYouThemeProvider>
-      <WelcomeScreen />
+      <RootNavigation />
     </MaterialYouThemeProvider>
   );
 };
