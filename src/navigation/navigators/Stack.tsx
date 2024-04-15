@@ -12,8 +12,16 @@ export const StackNavigator = () => (
     initialRouteName="Welcome"
     screenOptions={{ headerShown: false }}
   >
-    <Stack.Screen name="Welcome" component={WelcomeScreen} />
+    <Stack.Screen
+      name="Welcome"
+      component={WelcomeScreen}
+      options={{ animation: "fade" }}
+    />
     <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Search" component={SearchScreen} />
+    <Stack.Screen
+      name="Search"
+      component={SearchScreen}
+      options={{ animation: "slide_from_right" }}
+    />
   </Stack.Navigator>
 );
