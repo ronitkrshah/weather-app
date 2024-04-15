@@ -1,3 +1,4 @@
+import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { BaseLayout } from "../layouts/Base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -17,11 +18,21 @@ export const WelcomeScreen = () => {
 
   return (
     <BaseLayout>
-      <MaterialCommunityIcons name="weather-cloudy" size={80} />
-      <Text variant="titleLarge">Weather</Text>
-      <Text variant="titleSmall" style={{ color: "grey" }}>
-        A FOSS Material You Weather App
-      </Text>
+      <View style={styles.container}>
+        <MaterialCommunityIcons name="weather-cloudy" size={80} />
+        <Text variant="titleLarge">Weather</Text>
+        <Text variant="titleSmall" style={{ color: "grey" }}>
+          A FOSS Material You Weather App
+        </Text>
+      </View>
     </BaseLayout>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
