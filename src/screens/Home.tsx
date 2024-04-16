@@ -1,5 +1,4 @@
 import { View } from "react-native";
-import Toast from "react-native-toast-message";
 import { Card } from "src/components/Screen/HomeScreen/Card";
 import { FloatingActionButtons } from "src/components/Screen/HomeScreen/FloatingActionButtons";
 import { Header } from "src/components/Screen/HomeScreen/Header";
@@ -14,9 +13,6 @@ export const HomeScreen = () => {
       <View style={{ height: 80 }} />
       <Temperature />
       <Card />
-
-      <Toast />
-
       {/* Floating Action Button for Search and Location */}
       <FloatingActionButtons />
     </BaseLayout>
