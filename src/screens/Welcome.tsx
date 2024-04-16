@@ -6,15 +6,29 @@ import { useNavigation } from "@react-navigation/native";
 
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { StackNavigationRoutes } from "src/types/navigation/routes/stack";
+import { useStore } from "src/store";
+import { useFetchData } from "src/hooks/useFetchData";
+import { useEffect } from "react";
 
 export const WelcomeScreen = () => {
+  const setWeatherData = useStore((state) => state.setWeatherData);
   const navigation =
     useNavigation<NativeStackNavigationProp<StackNavigationRoutes>>();
 
-  // TimeOut
-  setTimeout(() => {
-    navigation.replace("Home");
-  }, 1000);
+  const { data } = useFetchData("/forecast.json", "Ishikawa", {
+    aqi: "no",
+    alerts: "no",
+  });
+
+  // effect
+  useEffect(() => {
+    if (data) {
+      console.log("Data Found");
+
+      setWeatherData(data);
+      navigation.replace("Home");
+    }
+  }, [data]);
 
   return (
     <BaseLayout>

@@ -1,12 +1,29 @@
 import { SurfaceContainer } from "src/components/Common/Containers/SurfaceContainer";
 import { CardItem } from "./CardItem";
+import { useStore } from "src/store";
 
 export const Card = () => {
+  const weatherData = useStore((state) => state.weatherData);
+
   return (
-    <SurfaceContainer>
-      <CardItem icon="air" title="22 Km/h" subtitle="WindSpeed" />
-      <CardItem icon="water-drop" title="62%" subtitle="Humidity" />
-      <CardItem icon="visibility" title="10 Km" subtitle="Visibility" />
-    </SurfaceContainer>
+    weatherData && (
+      <SurfaceContainer>
+        <CardItem
+          icon="air"
+          title={`${weatherData.current.wind_kph} Km/h`}
+          subtitle="WindSpeed"
+        />
+        <CardItem
+          icon="water-drop"
+          title={`${weatherData.current.humidity}%`}
+          subtitle="Humidity"
+        />
+        <CardItem
+          icon="visibility"
+          title={`${weatherData.current.vis_km} Km`}
+          subtitle="Visibility"
+        />
+      </SurfaceContainer>
+    )
   );
 };
