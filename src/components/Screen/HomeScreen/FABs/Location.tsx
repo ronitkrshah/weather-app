@@ -1,62 +1,56 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Geolocation from "@react-native-community/geolocation";
-import { useCallback, useState } from "react";
-import { StyleSheet } from "react-native";
+import { useState } from "react";
+import { StyleSheet, ToastAndroid } from "react-native";
 import { Button, FAB, Text } from "react-native-paper";
-import Toast from "react-native-toast-message";
 import { weatherApi } from "src/api/weatherApi";
 import { Dialog } from "src/components/Common/Dialog";
 import { useStore } from "src/store";
+import { requestLocation } from "src/utils/getLocation";
 
 export const FABLocation = () => {
   const [visibleDialog, setVisibleDialog] = useState(false);
   const setWeatherData = useStore((state) => state.setWeatherData);
 
-  // Getting Geolocation permission
-  const handleClick = useCallback(() => {
-    Geolocation.getCurrentPosition(
-      (pos) => {
-        // Saving coords to local storage to fetch data on welcome screen
-        const coords = `${pos.coords.latitude},${pos.coords.longitude}`;
-        // Saving Item
-        AsyncStorage.setItem("location", coords);
+  // Handle Click on FAB
+  async function handleClick() {
+    const granted = await requestLocation();
 
-        // Refetch weather data
-        weatherApi.getWeatherData(coords).then(({ data }) => {
-          data && setWeatherData(data);
-        });
-      },
-      (error) => {
-        // If permission is denied show dialog
-        if (error.PERMISSION_DENIED) {
-          setVisibleDialog(true);
-        }
-      },
-    );
-  }, []);
+    if (granted) {
+      Geolocation.getCurrentPosition(
+        (position) => {
+          const coords = `${position.coords.latitude},${position.coords.longitude}`;
+
+          // Saving Coords to local storage
+          AsyncStorage.setItem("location", coords);
+
+          // Fetching Data from api
+          weatherApi.getWeatherData(coords).then(({ data }) => {
+            // update Global Store
+            data && setWeatherData(data);
+          });
+        },
+        /*
+         * Show Toast Message if Geolocation throws an error
+         * */
+        (error) => {
+          ToastAndroid.show(error.message, ToastAndroid.SHORT);
+        },
+      );
+    } else {
+      // If Location permission is not granted by user show Dialog for requesting
+      // Location Permission
+      setVisibleDialog(true);
+    }
+  }
 
   // Handle Ok on Dialog
-  const handleOk = () => {
+  function handleOk() {
+    // Ask user for location premission
+    requestLocation();
     // Hide Dialog
     setVisibleDialog(false);
-
-    Geolocation.requestAuthorization(
-      // Handle success
-      () => {
-        Toast.show({
-          type: "success",
-          text1: "Location Permission Granted",
-        });
-      },
-      // Handle error
-      (error) => {
-        Toast.show({
-          type: "error",
-          text1: error.message,
-        });
-      },
-    );
-  };
+  }
 
   // Render
   return (
