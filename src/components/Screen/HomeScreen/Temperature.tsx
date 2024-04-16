@@ -12,13 +12,13 @@ export const Temperature = () => {
         <View>
           <Text style={styles.textCenter}>Current (Celsius)</Text>
           <Text style={{ ...styles.textCenter, fontSize: 50 }}>
-            {weatherData.current.temp_c}
+            {Math.round(weatherData.current.temp_c)}°
           </Text>
         </View>
         <View>
           <Text style={styles.textCenter}>Feels Like (Celsius)</Text>
           <Text style={{ ...styles.textCenter, fontSize: 50 }}>
-            {weatherData.current.feelslike_c}
+            {Math.round(weatherData.current.feelslike_c)}°
           </Text>
         </View>
       </SurfaceContainer>
