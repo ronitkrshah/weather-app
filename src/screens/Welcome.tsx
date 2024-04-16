@@ -19,27 +19,32 @@ export const WelcomeScreen = () => {
    * Since Welcome screen only show on stratup there's no need to use useEffect
    * hook
    */
-  AsyncStorage.getItem("location").then((data) => {
-    /*
-     * If Async Storage location not found use public ip
-     */
-    if (data) {
-      weatherApi.getWeatherData(data).then(({ data: info }) => {
-        info && setWeatherData(info);
-        navigation.replace("Home");
-      });
-    } else {
-      /*
-       * Use public Ip address for fetchng location*/
-      publicIP().then((ip) => {
-        weatherApi.getWeatherData(ip).then(({ data: info }) => {
-          info && setWeatherData(info);
-          navigation.replace("Home");
-        });
-      });
-    }
-  });
+  (async function () {
+    // This will be Latitude & Longitude or public IP address
+    let location: string;
 
+    // Cooardinates from local storage
+    const cooardinates = await AsyncStorage.getItem("location");
+
+    // If cooardinates aren't available use public IP address to get weather
+    // data
+    if (cooardinates) {
+      location = cooardinates;
+    } else {
+      location = await publicIP();
+    }
+
+    /* Getting data from weather api */
+    const weatherData = await weatherApi.getWeatherData(location);
+
+    // If weatherData isn't null update Global Store
+    weatherData.data && setWeatherData(weatherData.data);
+
+    // navigate to home screen
+    navigation.replace("Home");
+  })();
+
+  // Render
   return (
     <BaseLayout>
       <View style={styles.container}>
