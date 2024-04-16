@@ -19,10 +19,10 @@ export const SearchItem = ({ data }: SearchItemProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<StackNavigationRoutes>>();
 
-  const handleOnPress = () => {
-    weatherApi.getWeatherData(`id:${data.id}`).then(({ data }) => {
-      data && setWeatherData(data);
-    });
+  const handleOnPress = async () => {
+    const weatherData = await weatherApi.getWeatherData(`id:${data.id}`);
+    // Update Global Store
+    weatherData.data && setWeatherData(weatherData.data);
     // Go to home screen
     navigation.goBack();
   };
