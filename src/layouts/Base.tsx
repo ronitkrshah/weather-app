@@ -1,22 +1,58 @@
 import type { FC, PropsWithChildren } from "react";
-import { StatusBar, StyleSheet, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
+// Props
+interface BaseLayoutProps extends PropsWithChildren {
+  type?: "VIEW" | "SCROLL_VIEW";
+}
+
+export const BaseLayout: FC<BaseLayoutProps> = ({
+  children,
+  type = "VIEW",
+}) => {
   // Material You Colors
   const colors = useTheme().colors;
 
+  // Safe Area Insets
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaProvider style={styles.safeArea}>
+    <>
+      {/* Update StatusBar */}
       <StatusBar
         backgroundColor={colors.surfaceVariant}
         barStyle={"dark-content"}
       />
-      <View style={{ ...styles.base, backgroundColor: colors.surfaceVariant }}>
-        {children}
-      </View>
-    </SafeAreaProvider>
+
+      {/* BaseLayout */}
+      {type === "VIEW" ? (
+        <View
+          style={{
+            ...styles.base,
+            backgroundColor: colors.surfaceVariant,
+            paddingTop: insets.top,
+            paddingBottom: insets.bottom,
+          }}
+        >
+          {children}
+        </View>
+      ) : (
+        // If type == "SCROLL_VIEW" return ScrollView
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            ...styles.base,
+            backgroundColor: colors.surfaceVariant,
+            paddingTop: insets.top,
+            paddingBottom: insets.bottom,
+          }}
+        >
+          {children}
+        </ScrollView>
+      )}
+    </>
   );
 };
 
@@ -26,7 +62,6 @@ const styles = StyleSheet.create({
   },
   base: {
     flex: 1,
-    paddingVertical: 10,
     paddingHorizontal: 16,
   },
 });
