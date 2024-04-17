@@ -64,24 +64,23 @@ export const FABLocation = () => {
         onPress={handleClick}
       />
 
-      {visibleDialog && (
-        <Dialog
-          visible={visibleDialog}
-          setVisible={setVisibleDialog}
-          content={
-            <Text>
-              To continue, let your device turn on location, which uses Google's
-              location service
-            </Text>
-          }
-          actions={
-            <>
-              <Button onPress={() => setVisibleDialog(false)}>Cancel</Button>
-              <Button onPress={handleOk}>Ok</Button>
-            </>
-          }
-        />
-      )}
+      {/* TODO: Move Dialog into a Separate component */}
+      <Dialog
+        visible={visibleDialog}
+        setVisible={setVisibleDialog}
+        content={
+          <Text>
+            To continue, let your device turn on location, which uses Google's
+            location service
+          </Text>
+        }
+        actions={
+          <>
+            <Button onPress={() => setVisibleDialog(false)}>Cancel</Button>
+            <Button onPress={handleOk}>Ok</Button>
+          </>
+        }
+      />
     </>
   );
 };
