@@ -70,7 +70,7 @@ export const FABLocation = () => {
           setVisible={setVisibleDialog}
           content={
             <Text>
-              To conitnue, let your device turn on location, which uses Google's
+              To continue, let your device turn on location, which uses Google's
               location service
             </Text>
           }
