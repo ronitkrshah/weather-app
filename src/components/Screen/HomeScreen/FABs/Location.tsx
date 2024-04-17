@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Geolocation from "@react-native-community/geolocation";
 import { useState } from "react";
-import { StyleSheet, ToastAndroid } from "react-native";
+import { PermissionsAndroid, StyleSheet, ToastAndroid } from "react-native";
 import { Button, FAB, Text } from "react-native-paper";
 import { weatherApi } from "src/api/weatherApi";
 import { Dialog } from "src/components/Common/Dialog";
@@ -14,7 +14,10 @@ export const FABLocation = () => {
 
   // Handle Click on FAB
   async function handleClick() {
-    const granted = await requestLocation();
+    // getting status for FINE_LOCATION
+    const granted = await PermissionsAndroid.check(
+      "android.permission.ACCESS_FINE_LOCATION",
+    );
 
     if (granted) {
       Geolocation.getCurrentPosition(
