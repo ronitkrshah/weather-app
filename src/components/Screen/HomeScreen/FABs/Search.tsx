@@ -12,7 +12,7 @@ export const FABSearch = () => {
 
   /* navigate to search page*/
   function navigatieToSearchPage() {
-    navigation.push("Search");
+    navigation.navigate("Search");
   }
 
   // Render
