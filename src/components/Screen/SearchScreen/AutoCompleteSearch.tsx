@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useFetchData } from "src/hooks/useFetchData";
 import { AutoSuggestionResponse } from "src/types/api/AutoSuggestionResponse";
 import { SearchList } from "./SearchList";
-import { ActivityIndicator, Text } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
+import { ToastAndroid } from "react-native";
 
 export const AutoCompleteSearch = () => {
   const [query, setQuery] = useState("");
@@ -13,6 +14,11 @@ export const AutoCompleteSearch = () => {
 
   // Actual Search suggestions data from api response
   const data: null | AutoSuggestionResponse[] = response.data;
+
+  // Show Error as Toast Message
+  if (response.error) {
+    ToastAndroid.show(response.error.message, ToastAndroid.SHORT);
+  }
 
   // Render
   return (
@@ -24,9 +30,6 @@ export const AutoCompleteSearch = () => {
 
       {/* Actual Search suggestions data from api response */}
       {data && <SearchList data={data} />}
-
-      {/* Show Error */}
-      {response.error && <Text>{response.error.message}</Text>}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, ToastAndroid } from "react-native";
 import { Text } from "react-native-paper";
 import { weatherApi } from "src/api/weatherApi";
 import { useStore } from "src/store";
@@ -21,10 +21,13 @@ export const SearchItem = ({ data }: SearchItemProps) => {
 
   const handleOnPress = async () => {
     const weatherData = await weatherApi.getWeatherData(`id:${data.id}`);
-    // Update Global Store
-    weatherData.data && setWeatherData(weatherData.data);
-    // Go to home screen
-    navigation.goBack();
+
+    if (weatherData.data) {
+      setWeatherData(weatherData.data);
+      navigation.goBack();
+    } else {
+      ToastAndroid.show(weatherData.error?.message!, ToastAndroid.SHORT);
+    }
   };
 
   return (
