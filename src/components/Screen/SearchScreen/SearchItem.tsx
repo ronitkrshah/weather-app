@@ -39,6 +39,9 @@ export const SearchItem = ({ data }: SearchItemProps) => {
       <Text variant="titleLarge">
         {data.name}, {data.country}
       </Text>
+
+      {/* Show Region */}
+      <Text style={{ color: "grey" }}>{data.region}</Text>
     </Pressable>
   );
 };
