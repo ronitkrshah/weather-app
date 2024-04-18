@@ -1,5 +1,5 @@
 import { SurfaceContainer } from "src/components/Common/Containers/SurfaceContainer";
-import { ForeCastData } from "src/components/Screen/Forecast/ForeCastData";
+import { ForeCastData } from "src/components/Screen/ForecastScreen/ForeCastData";
 import { Header } from "src/components/Shared/Header";
 import { BaseLayout } from "src/layouts/Base";
 import { useStore } from "src/store";
