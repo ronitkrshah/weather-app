@@ -23,7 +23,9 @@ export const Header: FC<Props> = ({ showDate = true }) => {
       {/* Date */}
       {showDate && (
         <Text style={{ ...styles.date, backgroundColor: colors.primary }}>
-          {new Date().toDateString()}
+          {new Date(
+            weatherData?.location.localtime.split(" ")[0]!,
+          ).toDateString()}
         </Text>
       )}
     </View>
