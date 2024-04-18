@@ -1,5 +1,5 @@
 import { SurfaceContainer } from "src/components/Common/Containers/SurfaceContainer";
-import { CardItem } from "./CardItem";
+import { Card as CardItem } from "src/components/Common/Card";
 import { useStore } from "src/store";
 
 export const Card = () => {

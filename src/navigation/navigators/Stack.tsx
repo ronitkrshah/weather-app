@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { WelcomeScreen } from "src/screens/Welcome";
 import { HomeScreen } from "src/screens/Home";
 import { SearchScreen } from "src/screens/Search";
+import { ForecastScreen } from "src/screens/Forecast";
 
 const Stack = createNativeStackNavigator<StackNavigationRoutes>();
 
@@ -21,6 +22,11 @@ export const StackNavigator = () => (
     <Stack.Screen
       name="Search"
       component={SearchScreen}
+      options={{ animation: "slide_from_right" }}
+    />
+    <Stack.Screen
+      name="Forecast"
+      component={ForecastScreen}
       options={{ animation: "slide_from_right" }}
     />
   </Stack.Navigator>

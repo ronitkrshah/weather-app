@@ -4,13 +4,14 @@ import { Surface } from "react-native-paper";
 
 type SurfaceContainerProps = {
   style?: ViewStyle;
+  mode?: "flat" | "elevated";
 };
 
 export const SurfaceContainer: FC<
   PropsWithChildren & SurfaceContainerProps
-> = ({ children, style }) => {
+> = ({ children, style, mode = "elevated" }) => {
   return (
-    <Surface elevation={2} style={{ ...styles.surface, ...style }}>
+    <Surface elevation={2} style={{ ...styles.surface, ...style }} mode={mode}>
       {children}
     </Surface>
   );

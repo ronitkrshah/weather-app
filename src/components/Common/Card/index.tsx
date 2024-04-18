@@ -1,3 +1,4 @@
+import { ViewStyle } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -6,11 +7,17 @@ type CardItemProps = {
   icon: string;
   title: string;
   subtitle: string;
+  containerStyle?: ViewStyle;
 };
 
-export const CardItem = ({ icon, title, subtitle }: CardItemProps) => {
+export const Card = ({
+  icon,
+  title,
+  subtitle,
+  containerStyle,
+}: CardItemProps) => {
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, ...containerStyle }}>
       <MaterialIcons name={icon} size={32} />
 
       <View>

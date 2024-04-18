@@ -13,6 +13,7 @@ class WeatherApi {
         baseURL: "https://api.weatherapi.com/v1",
         params: {
           key: WEATHER_API_KEY,
+          days: 3,
           q: query,
           aqi: "no",
           alerts: "no",
