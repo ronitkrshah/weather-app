@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
-import { ColoredDate } from "src/components/Common/ColoredDate";
 import getDayFromDate from "src/utils/getDayFromDate";
 
 type DayProps = {
@@ -16,7 +15,9 @@ export const Day: FC<DayProps> = ({ date }) => {
       <Text style={{ flex: 1, fontSize: 16, color: "white" }}>
         {getDayFromDate(date)}
       </Text>
-      <ColoredDate date={date} />
+      <Text variant="titleMedium" style={{ color: "white" }}>
+        {new Date(date).toDateString()}
+      </Text>
     </View>
   );
 };
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingLeft: 25,
-    paddingVertical: 5,
+    paddingHorizontal: 25,
+    paddingVertical: 8,
   },
 });
