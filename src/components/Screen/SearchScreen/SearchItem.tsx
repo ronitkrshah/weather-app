@@ -36,12 +36,12 @@ export const SearchItem = ({ data }: SearchItemProps) => {
       android_ripple={{ borderless: false, color: "#5e5e5e" }}
       style={styles.container}
     >
-      <Text variant="titleLarge">
-        {data.name}, {data.country}
-      </Text>
+      <Text variant="titleLarge">{data.name} </Text>
 
       {/* Show Region */}
-      <Text style={{ color: "grey" }}>{data.region}</Text>
+      <Text style={{ color: "grey" }}>
+        {data.region}, {data.country}
+      </Text>
     </Pressable>
   );
 };
@@ -49,6 +49,6 @@ export const SearchItem = ({ data }: SearchItemProps) => {
 const styles = StyleSheet.create({
   container: {
     overflow: "hidden",
-    padding: 15,
+    padding: 11,
   },
 });
