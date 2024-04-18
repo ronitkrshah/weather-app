@@ -25,13 +25,13 @@ export const AutoCompleteSearch = () => {
     <>
       <SearchBox setValue={setQuery} placeholder="Search Places" />
 
-      {/* Loading Indicator */}
-      {response.loading && (
+      {/* Basically if loading is true don't show old search suggestions */}
+      {response.loading ? (
         <ActivityIndicator style={{ marginTop: 20 }} size={"large"} />
+      ) : (
+        /* If Loading is false and we have the data then show Search list */
+        data && <SearchList data={data} />
       )}
-
-      {/* Actual Search suggestions data from api response */}
-      {data && <SearchList data={data} />}
     </>
   );
 };
