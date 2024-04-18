@@ -46,6 +46,6 @@ export const SearchItem = ({ data }: SearchItemProps) => {
 const styles = StyleSheet.create({
   container: {
     overflow: "hidden",
-    paddingVertical: 15,
+    padding: 15,
   },
 });

@@ -4,7 +4,7 @@ import { useFetchData } from "src/hooks/useFetchData";
 import { AutoSuggestionResponse } from "src/types/api/AutoSuggestionResponse";
 import { SearchList } from "./SearchList";
 import { ActivityIndicator } from "react-native-paper";
-import { ToastAndroid, View } from "react-native";
+import { ToastAndroid } from "react-native";
 
 export const AutoCompleteSearch = () => {
   const [query, setQuery] = useState("");
