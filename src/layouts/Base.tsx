@@ -32,7 +32,7 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
           style={{
             ...styles.base,
             backgroundColor: colors.surfaceVariant,
-            paddingTop: insets.top,
+            paddingTop: insets.top + 10,
             paddingBottom: insets.bottom,
           }}
         >
