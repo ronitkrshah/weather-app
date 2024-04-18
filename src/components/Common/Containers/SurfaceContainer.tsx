@@ -11,7 +11,7 @@ export const SurfaceContainer: FC<
   PropsWithChildren & SurfaceContainerProps
 > = ({ children, style, mode = "elevated" }) => {
   return (
-    <Surface elevation={2} style={{ ...styles.surface, ...style }} mode={mode}>
+    <Surface elevation={1} style={{ ...styles.surface, ...style }} mode={mode}>
       {children}
     </Surface>
   );
