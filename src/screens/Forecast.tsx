@@ -18,7 +18,11 @@ export const ForecastScreen = () => {
       <Header showDate={false} />
 
       {weatherData.forecast.forecastday.map((item, i) => (
-        <SurfaceContainer key={i} mode="flat">
+        <SurfaceContainer
+          style={{ padding: 0, overflow: "hidden" }}
+          key={i}
+          mode="flat"
+        >
           <ForeCastData data={item} />
         </SurfaceContainer>
       ))}
