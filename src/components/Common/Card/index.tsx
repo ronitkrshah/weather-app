@@ -1,7 +1,7 @@
 import { ViewStyle } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 type CardItemProps = {
   icon: string;
@@ -18,7 +18,7 @@ export const Card = ({
 }: CardItemProps) => {
   return (
     <View style={{ ...styles.container, ...containerStyle }}>
-      <MaterialIcons name={icon} size={32} />
+      <MaterialCommunityIcons name={icon} size={32} />
 
       <View>
         <Text variant="titleMedium" style={styles.title}>

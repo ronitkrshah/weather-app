@@ -9,17 +9,17 @@ export const Card = () => {
     weatherData && (
       <SurfaceContainer>
         <CardItem
-          icon="air"
+          icon="weather-windy"
           title={`${weatherData.current.wind_kph} Km/h`}
           subtitle="WindSpeed"
         />
         <CardItem
-          icon="water-drop"
+          icon="water-outline"
           title={`${weatherData.current.humidity}%`}
           subtitle="Humidity"
         />
         <CardItem
-          icon="visibility"
+          icon="eye"
           title={`${weatherData.current.vis_km} Km`}
           subtitle="Visibility"
         />
