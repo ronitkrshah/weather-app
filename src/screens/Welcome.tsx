@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, ToastAndroid, View } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
 import { BaseLayout } from "../layouts/Base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -32,17 +32,29 @@ export const WelcomeScreen: FC<Props> = ({ navigation }) => {
     if (cooardinates) {
       location = cooardinates;
     } else {
-      location = await publicIP();
+      try {
+        // Getting publicIP
+        location = await publicIP();
+      } catch (e) {
+        // Set default location to London
+        location = "London";
+      }
     }
 
     /* Getting data from weather api */
     const weatherData = await weatherApi.getWeatherData(location);
 
-    // If weatherData isn't null update Global Store
-    weatherData.data && setWeatherData(weatherData.data);
+    if (weatherData.data) {
+      setWeatherData(weatherData.data);
 
-    // navigate to home screen
-    navigation.replace("Home");
+      // Ensure that Weather Data isn't null
+      navigation.replace("Home");
+    } else {
+      ToastAndroid.show(
+        weatherData.error?.message || "Something Went Wrong",
+        ToastAndroid.SHORT,
+      );
+    }
   })();
 
   // Render
