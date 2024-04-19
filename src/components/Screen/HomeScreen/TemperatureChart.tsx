@@ -21,7 +21,7 @@ export const TemperatureChart = () => {
 
   // Filtered Array
   const filteredLabels = filterHrsByInterval(orgLabelsArray, 4);
-  const filteredHoursSTR = filterHrsByInterval(orgHoursArray, 3); // string
+  const filteredHoursSTR = filterHrsByInterval(orgHoursArray, 4); // string
   const filteredHoursINT = filteredHoursSTR.map((str) => parseInt(str)); // number
 
   return (
@@ -37,6 +37,7 @@ export const TemperatureChart = () => {
           ],
         }}
         width={Dimensions.get("window").width - 32}
+        fromZero
         height={220}
         yAxisSuffix="°C"
         chartConfig={{
