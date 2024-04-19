@@ -1,36 +1,51 @@
 import { SearchBox } from "src/components/Common/Search";
-import { useState } from "react";
-import { useFetchData } from "src/hooks/useFetchData";
+import { useEffect, useState } from "react";
 import { AutoSuggestionResponse } from "src/types/api/AutoSuggestionResponse";
 import { SearchList } from "./SearchList";
 import { ActivityIndicator } from "react-native-paper";
 import { ToastAndroid } from "react-native";
+import { weatherApi } from "src/api/weatherApi";
 
 export const AutoCompleteSearch = () => {
+  // States
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [suggestions, setSuggestions] = useState<
+    AutoSuggestionResponse[] | null
+  >(null);
 
-  // Fetch Auto complete suggestions
-  const response = useFetchData("/search.json", query);
+  // Effect
+  useEffect(() => {
+    // IIFE
+    (async function () {
+      setLoading(true);
 
-  // Actual Search suggestions data from api response
-  const data: null | AutoSuggestionResponse[] = response.data;
+      if (query.length > 2) {
+        // Fetch Auto complete suggestions
+        const { data, error } = await weatherApi.getSearchSuggestions(query);
 
-  // Show Error as Toast Message
-  if (response.error) {
-    ToastAndroid.show(response.error.message, ToastAndroid.SHORT);
-  }
+        if (data) {
+          setSuggestions(data);
+        } else {
+          ToastAndroid.show(
+            error?.message || "Something Went Wrong",
+            ToastAndroid.SHORT,
+          );
+        }
+      }
+      setLoading(false);
+    })();
+  }, [query]);
 
   // Render
   return (
     <>
       <SearchBox setValue={setQuery} placeholder="Search Places" />
 
-      {/* Basically if loading is true don't show old search suggestions */}
-      {response.loading ? (
-        <ActivityIndicator style={{ marginTop: 20 }} size={"large"} />
+      {loading ? (
+        <ActivityIndicator size={"large"} style={{ marginTop: 20 }} />
       ) : (
-        /* If Loading is false and we have the data then show Search list */
-        data && <SearchList data={data} />
+        suggestions && <SearchList data={suggestions} />
       )}
     </>
   );
