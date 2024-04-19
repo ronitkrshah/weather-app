@@ -2,11 +2,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Geolocation from "@react-native-community/geolocation";
 import { useState } from "react";
 import { PermissionsAndroid, StyleSheet, ToastAndroid } from "react-native";
-import { Button, FAB, Text } from "react-native-paper";
+import { FAB } from "react-native-paper";
 import { weatherApi } from "src/api/weatherApi";
-import { Dialog } from "src/components/Common/Dialog";
 import { useStore } from "src/store";
-import { requestLocation } from "src/utils/getLocation";
+import { LocationPermissionDialog } from "../LocationPermissionDialog";
 
 export const FABLocation = () => {
   const [visibleDialog, setVisibleDialog] = useState(false);
@@ -19,6 +18,7 @@ export const FABLocation = () => {
       "android.permission.ACCESS_FINE_LOCATION",
     );
 
+    // Check if location is granted
     if (granted) {
       Geolocation.getCurrentPosition(
         (position) => {
@@ -47,14 +47,6 @@ export const FABLocation = () => {
     }
   }
 
-  // Handle Ok on Dialog
-  function handleOk() {
-    // Ask user for location premission
-    requestLocation();
-    // Hide Dialog
-    setVisibleDialog(false);
-  }
-
   // Render
   return (
     <>
@@ -64,22 +56,9 @@ export const FABLocation = () => {
         onPress={handleClick}
       />
 
-      {/* TODO: Move Dialog into a Separate component */}
-      <Dialog
+      <LocationPermissionDialog
         visible={visibleDialog}
         setVisible={setVisibleDialog}
-        content={
-          <Text>
-            To continue, let your device turn on location, which uses Google's
-            location service
-          </Text>
-        }
-        actions={
-          <>
-            <Button onPress={() => setVisibleDialog(false)}>Cancel</Button>
-            <Button onPress={handleOk}>Ok</Button>
-          </>
-        }
       />
     </>
   );
