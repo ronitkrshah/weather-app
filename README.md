@@ -10,7 +10,7 @@ Welcome to Weather, a simple weather app for Android built with React Native and
 - [X] Get information like temperature, humidity, wind speed, etc
 - [X] Search for weather conditions in different locations
 - [X] Temperature Chart
-- [ ] Check the weather forecast for the next 3 days (WIP)
+- [X] Check the weather forecast for the next 3 days
 
 ## Checking Releases
 - Check the [Releases](https://github.com/ronitkrshah/weather-app/releases) section for updates and release notes.
