@@ -19,18 +19,16 @@ export const AutoCompleteSearch = () => {
     // IIFE
     (async function () {
       setLoading(true);
+      setSuggestions(null);
 
       if (query.length > 2) {
         // Fetch Auto complete suggestions
         const { data, error } = await weatherApi.getSearchSuggestions(query);
 
-        if (data) {
+        if (data && data.length > 0) {
           setSuggestions(data);
-        } else {
-          ToastAndroid.show(
-            error?.message || "Something Went Wrong",
-            ToastAndroid.SHORT,
-          );
+        } else if (error) {
+          ToastAndroid.show(error.message, ToastAndroid.SHORT);
         }
       }
       setLoading(false);
