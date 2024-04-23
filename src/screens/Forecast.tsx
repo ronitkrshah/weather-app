@@ -1,4 +1,5 @@
 import { SurfaceContainer } from "src/components/Common/Containers/SurfaceContainer";
+import { InfoHint } from "src/components/Common/InfoHint";
 import { ForeCastData } from "src/components/Screen/ForecastScreen/ForeCastData";
 import { Header } from "src/components/Shared/Header";
 import { BaseLayout } from "src/layouts/Base";
@@ -26,6 +27,14 @@ export const ForecastScreen = () => {
           <ForeCastData data={item} />
         </SurfaceContainer>
       ))}
+
+      {/* Info */}
+      <InfoHint
+        text={
+          "The data provided represents average information. Actual " +
+          "results may vary."
+        }
+      />
     </BaseLayout>
   );
 };
