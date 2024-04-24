@@ -11,47 +11,49 @@ export const Card = () => {
 
   return (
     weatherData && (
-      <SurfaceContainer style={{ flexDirection: "column" }}>
-        <Text
-          variant="titleLarge"
-          style={{ ...styles.weatherCondition, color: colors.primary }}
-        >
-          {weatherData.current.condition.text}
-        </Text>
-
-        <View style={styles.cardContainer}>
-          <CardItem
-            icon="weather-windy"
-            title={`${weatherData.current.wind_kph} Km/h`}
-            subtitle="WindSpeed"
-          />
-          <CardItem
-            icon="water-outline"
-            title={`${weatherData.current.humidity}%`}
-            subtitle="Humidity"
-          />
-          <CardItem
-            icon="eye"
-            title={`${weatherData.current.vis_km} Km`}
-            subtitle="Visibility"
-          />
-        </View>
-
-        {/* API Link */}
-        <View style={styles.linkingContainer}>
-          <MaterialIcons
-            style={styles.openUrlIcon}
-            name="open-in-new"
-            size={16}
-          />
+      <View style={{ alignItems: "center" }}>
+        <SurfaceContainer style={{ flexDirection: "column", width: "98%" }}>
           <Text
-            style={styles.linkText}
-            onPress={() => Linking.openURL("https://www.weatherapi.com")}
+            variant="titleLarge"
+            style={{ ...styles.weatherCondition, color: colors.primary }}
           >
-            weatherapi.com
+            {weatherData.current.condition.text}
           </Text>
-        </View>
-      </SurfaceContainer>
+
+          <View style={styles.cardContainer}>
+            <CardItem
+              icon="weather-windy"
+              title={`${weatherData.current.wind_kph} Km/h`}
+              subtitle="WindSpeed"
+            />
+            <CardItem
+              icon="water-outline"
+              title={`${weatherData.current.humidity}%`}
+              subtitle="Humidity"
+            />
+            <CardItem
+              icon="eye"
+              title={`${weatherData.current.vis_km} Km`}
+              subtitle="Visibility"
+            />
+          </View>
+
+          {/* API Link */}
+          <View style={styles.linkingContainer}>
+            <MaterialIcons
+              style={styles.openUrlIcon}
+              name="open-in-new"
+              size={16}
+            />
+            <Text
+              style={styles.linkText}
+              onPress={() => Linking.openURL("https://www.weatherapi.com")}
+            >
+              weatherapi.com
+            </Text>
+          </View>
+        </SurfaceContainer>
+      </View>
     )
   );
 };

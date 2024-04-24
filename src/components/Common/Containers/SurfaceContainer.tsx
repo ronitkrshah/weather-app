@@ -20,6 +20,7 @@ export const SurfaceContainer: FC<
 const styles = StyleSheet.create({
   surface: {
     padding: 8,
+    width: "100%",
     borderRadius: 28,
     alignItems: "center",
     justifyContent: "space-evenly",
