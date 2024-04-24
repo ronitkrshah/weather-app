@@ -21,7 +21,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
 
   return (
     <>
-      <BaseLayout>
+      <BaseLayout type="SCROLL_VIEW">
         {/* Header with Location name and date */}
         <Header showDate />
 
