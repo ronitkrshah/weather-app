@@ -11,23 +11,11 @@ const Stack = createNativeStackNavigator<StackNavigationRoutes>();
 export const StackNavigator = () => (
   <Stack.Navigator
     initialRouteName="Welcome"
-    screenOptions={{ headerShown: false }}
+    screenOptions={{ headerShown: false, animation: "fade" }}
   >
-    <Stack.Screen
-      name="Welcome"
-      component={WelcomeScreen}
-      options={{ animation: "fade" }}
-    />
+    <Stack.Screen name="Welcome" component={WelcomeScreen} />
     <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen
-      name="Search"
-      component={SearchScreen}
-      options={{ animation: "slide_from_right" }}
-    />
-    <Stack.Screen
-      name="Forecast"
-      component={ForecastScreen}
-      options={{ animation: "slide_from_right" }}
-    />
+    <Stack.Screen name="Search" component={SearchScreen} />
+    <Stack.Screen name="Forecast" component={ForecastScreen} />
   </Stack.Navigator>
 );
