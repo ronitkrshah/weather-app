@@ -57,9 +57,6 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
   base: {
     flex: 1,
     paddingHorizontal: 16,
