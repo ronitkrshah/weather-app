@@ -22,7 +22,8 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
     <>
       {/* Update StatusBar */}
       <StatusBar
-        backgroundColor={colors.surfaceVariant}
+        backgroundColor={"transparent"}
+        translucent
         barStyle={"dark-content"}
       />
 
