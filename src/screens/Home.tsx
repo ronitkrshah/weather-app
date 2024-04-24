@@ -1,14 +1,14 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { FC } from "react";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import { Button } from "react-native-paper";
 import { Card } from "src/components/Screen/HomeScreen/Card";
 import { FloatingActionButtons } from "src/components/Screen/HomeScreen/FloatingActionButtons";
 import { Header } from "src/components/Shared/Header";
 import { Temperature } from "src/components/Screen/HomeScreen/Temperature";
 import { TemperatureChart } from "src/components/Screen/HomeScreen/TemperatureChart";
-import { BaseLayout } from "src/layouts/Base";
 import { StackNavigationRoutes } from "src/types/navigation/routes/stack";
+import { BaseLayout } from "src/layouts/Base";
 
 // Navigation Props
 type Props = NativeStackScreenProps<StackNavigationRoutes, "Home">;
@@ -20,24 +20,42 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
   }
 
   return (
-    <BaseLayout>
-      <Header />
-      {/* Spacing */}
-      <View style={{ height: 20 }} />
-      <Temperature />
-      <Card />
+    <>
+      <BaseLayout>
+        {/* Header with Location name and date */}
+        <Header showDate />
 
-      {/* Temperature Chart */}
-      <TemperatureChart />
+        {/* Spacing */}
+        <View style={{ height: 20 }} />
 
-      {/* Navigate to Forecast page */}
-      <View style={{ height: 20 }} />
-      <Button mode="contained" onPress={goToForecast}>
-        Go To Forecast
-      </Button>
+        {/* Current Temperature and Feels Like */}
+        <Temperature />
 
-      {/* Floating Action Button for Search and Location */}
+        {/* Card With details */}
+        <Card />
+
+        {/* Temperature Chart */}
+        <TemperatureChart />
+
+        {/* Spacing */}
+        <View style={{ height: 20 }} />
+
+        {/* Forecast Page */}
+        <Button onPress={goToForecast} mode="contained">
+          See Weather Forecast
+        </Button>
+
+        {/* <FloatingActionButtons /> */}
+      </BaseLayout>
+
+      {/* update Statusbar */}
+      <StatusBar
+        backgroundColor="transparent"
+        translucent
+        barStyle={"dark-content"}
+      />
+      {/* Floating Buttons  for search & current user location */}
       <FloatingActionButtons />
-    </BaseLayout>
+    </>
   );
 };

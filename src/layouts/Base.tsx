@@ -1,15 +1,17 @@
 import type { FC, PropsWithChildren } from "react";
-import { ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import { ScrollView, ScrollViewProps, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // Props
 interface BaseLayoutProps extends PropsWithChildren {
   type?: "VIEW" | "SCROLL_VIEW";
+  scrollViewProps?: ScrollViewProps;
 }
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
   children,
+  scrollViewProps,
   type = "VIEW",
 }) => {
   // Material You Colors
@@ -18,46 +20,32 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
   // Safe Area Insets
   const insets = useSafeAreaInsets();
 
+  // Return normal view
   return (
-    <>
-      {/* Update StatusBar */}
-      <StatusBar
-        backgroundColor={colors.surfaceVariant}
-        barStyle={"dark-content"}
-      />
-
-      {/* BaseLayout */}
-      {type === "VIEW" ? (
-        <View
-          style={{
-            ...styles.base,
-            backgroundColor: colors.surfaceVariant,
-            paddingTop: insets.top + 10,
-            paddingBottom: insets.bottom,
-          }}
-        >
-          {children}
-        </View>
-      ) : (
-        // If type == "SCROLL_VIEW" return ScrollView
+    <View
+      style={{
+        ...styles.rootContainer,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        backgroundColor: colors.surfaceVariant,
+      }}
+    >
+      {/* Check if ScrollView */}
+      {type === "SCROLL_VIEW" ? (
         <ScrollView
           showsVerticalScrollIndicator={false}
-          style={{
-            ...styles.base,
-            backgroundColor: colors.surfaceVariant,
-            paddingTop: insets.top,
-            paddingBottom: insets.bottom,
-          }}
-        >
-          {children}
-        </ScrollView>
+          children={children}
+          {...scrollViewProps}
+        />
+      ) : (
+        children
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  base: {
+  rootContainer: {
     flex: 1,
     paddingHorizontal: 16,
   },

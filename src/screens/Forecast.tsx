@@ -14,7 +14,10 @@ export const ForecastScreen = () => {
 
   // Render
   return (
-    <BaseLayout type="SCROLL_VIEW">
+    <BaseLayout
+      type="SCROLL_VIEW"
+      scrollViewProps={{ style: { paddingTop: 10 } }}
+    >
       {/* Header */}
       <Header showDate={false} />
 
