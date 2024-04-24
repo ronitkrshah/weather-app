@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { FC } from "react";
-import { StatusBar, View } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-paper";
 import { Card } from "src/components/Screen/HomeScreen/Card";
 import { FloatingActionButtons } from "src/components/Screen/HomeScreen/FloatingActionButtons";
@@ -48,12 +48,6 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
         {/* <FloatingActionButtons /> */}
       </BaseLayout>
 
-      {/* update Statusbar */}
-      <StatusBar
-        backgroundColor="transparent"
-        translucent
-        barStyle={"dark-content"}
-      />
       {/* Floating Buttons  for search & current user location */}
       <FloatingActionButtons />
     </>

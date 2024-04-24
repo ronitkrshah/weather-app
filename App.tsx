@@ -1,3 +1,4 @@
+import { StatusBar } from "react-native";
 import { MaterialYouThemeProvider } from "./src/providers/MaterialYouThemeProvider";
 import { RootNavigation } from "./src/navigation/RootNavigation";
 import { Portal } from "react-native-paper";
@@ -10,11 +11,19 @@ Geolocation.setRNConfiguration({
 
 const App = () => {
   return (
-    <MaterialYouThemeProvider>
-      <Portal>
-        <RootNavigation />
-      </Portal>
-    </MaterialYouThemeProvider>
+    <>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent
+        barStyle={"dark-content"}
+      />
+
+      <MaterialYouThemeProvider>
+        <Portal>
+          <RootNavigation />
+        </Portal>
+      </MaterialYouThemeProvider>
+    </>
   );
 };
 
