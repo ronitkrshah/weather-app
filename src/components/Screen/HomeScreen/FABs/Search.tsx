@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   searchFab: {
     position: "absolute",
     bottom: 80,
-    right: 16,
+    right: 30,
   },
 });

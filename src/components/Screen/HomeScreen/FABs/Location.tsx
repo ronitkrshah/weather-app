@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
   locationFab: {
     position: "absolute",
     bottom: 160,
-    right: 16,
+    right: 30,
   },
 });
