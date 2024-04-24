@@ -2,7 +2,8 @@ import { SurfaceContainer } from "src/components/Common/Containers/SurfaceContai
 import { Card as CardItem } from "src/components/Common/Card";
 import { useStore } from "src/store";
 import { Text, useTheme } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
+import { Linking, StyleSheet, View } from "react-native";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 export const Card = () => {
   const weatherData = useStore((state) => state.weatherData);
@@ -35,6 +36,21 @@ export const Card = () => {
             subtitle="Visibility"
           />
         </View>
+
+        {/* API Link */}
+        <View style={styles.linkingContainer}>
+          <MaterialIcons
+            style={styles.openUrlIcon}
+            name="open-in-new"
+            size={16}
+          />
+          <Text
+            style={styles.linkText}
+            onPress={() => Linking.openURL("https://www.weatherapi.com")}
+          >
+            weatherapi.com
+          </Text>
+        </View>
       </SurfaceContainer>
     )
   );
@@ -50,5 +66,20 @@ const styles = StyleSheet.create({
   weatherCondition: {
     marginBottom: 10,
     fontWeight: "700",
+  },
+  linkingContainer: {
+    marginVertical: 15,
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+  },
+  openUrlIcon: {
+    transform: [{ translateY: 2 }],
+  },
+  linkText: {
+    color: "grey",
+    textDecorationLine: "underline",
   },
 });
