@@ -1,7 +1,5 @@
 import { StatusBar } from "react-native";
-import { MaterialYouThemeProvider } from "./src/providers/MaterialYouThemeProvider";
 import { RootNavigation } from "./src/navigation/RootNavigation";
-import { Portal } from "react-native-paper";
 import Geolocation from "@react-native-community/geolocation";
 
 // Don't auto request location permission
@@ -18,11 +16,7 @@ const App = () => {
         barStyle={"dark-content"}
       />
 
-      <MaterialYouThemeProvider>
-        <Portal>
-          <RootNavigation />
-        </Portal>
-      </MaterialYouThemeProvider>
+      <RootNavigation />
     </>
   );
 };
